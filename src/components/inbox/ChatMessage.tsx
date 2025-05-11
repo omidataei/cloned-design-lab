@@ -1,3 +1,4 @@
+
 import React from "react";
 
 interface ChatMessageProps {
@@ -18,66 +19,67 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   const isAdminSuccess = type === "admin-success";
 
   const getBgColor = () => {
-    if (isAdminPrimary) return "bg-[#E3E1FC]";
-    if (isAdminSuccess) return "bg-[#24B364]";
-    return "";
+    if (isUser) return "bg-white";
+    if (isAdminPrimary) return "bg-indigo-100";
+    if (isAdminSuccess) return "bg-green-500";
+    return "bg-indigo-600";
   };
 
   const getTextColor = () => {
-    if (isAdminPrimary) return "text-[#675dd8]";
+    if (isUser) return "text-gray-800";
+    if (isAdminPrimary) return "text-indigo-700";
     if (isAdminSuccess || type === "admin") return "text-white";
-    return "text-[#2f2b3d]";
+    return "text-gray-800";
   };
 
   const getBorderRadius = () => {
-    if (isUser) return "rounded-[0px_6px_6px_6px]";
-    return "rounded-[6px_0px_6px_6px]";
+    if (isUser) return "rounded-tl-lg rounded-tr-lg rounded-br-lg";
+    return "rounded-tl-lg rounded-tr-lg rounded-bl-lg";
   };
 
   if (isUser) {
     return (
-      <div className="justify-center flex w-full flex-col text-[#2f2b3d] font-normal p-6 max-md:max-w-full max-md:px-5">
-        <div className="flex gap-4">
+      <div className="flex items-start gap-3 mb-4">
+        <div className="flex-1" /> {/* Spacer */}
+        <div className="max-w-[75%]">
+          <div className={`${getBorderRadius()} shadow-sm border border-gray-200 ${getBgColor()} ${getTextColor()} p-3`}>
+            {content}
+          </div>
+          <div className="text-xs text-gray-500 mt-1 text-right">
+            {time}
+          </div>
+        </div>
+        <div className="flex-shrink-0">
           <img
             src={avatar}
-            className="aspect-[1] object-contain w-8 min-h-8 shrink-0"
+            className="w-8 h-8 rounded-full"
+            alt="User"
           />
-          <div className="justify-center items-stretch flex min-w-60 flex-col w-[251px]">
-            <div className="w-full max-w-[251px]">
-              <div
-                className={`${getBorderRadius()} shadow-[0px_1px_6px_0px_rgba(47,43,61,0.10)] w-full text-[15px] leading-none px-4 py-2 ${getTextColor()}`}
-              >
-                {content}
-              </div>
-              <div className="w-11 gap-1.5 text-[13px] tracking-[0.4px] leading-none mt-1">
-                {time}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="justify-center flex w-full flex-col font-normal p-6 max-md:max-w-full max-md:px-5">
-      <div className="flex w-[378px] max-w-full gap-4">
-        <div className="justify-center flex min-w-60 flex-col w-72">
-          <div className="flex w-full max-w-[292px] flex-col justify-center">
-            <div
-              className={`${getBorderRadius()} shadow-[0px_1px_6px_0px_rgba(47,43,61,0.10)] w-full text-[15px] ${getTextColor()} text-right leading-none ${getBgColor()} px-4 py-2`}
-            >
-              {content}
-            </div>
-            <div className="self-stretch gap-2 text-[13px] text-[#2f2b3d] tracking-[0.4px] leading-none mt-1.5">
-              {time}
-            </div>
-          </div>
+    <div className="flex items-start gap-3 mb-4">
+      {avatar && (
+        <div className="flex-shrink-0">
+          <img 
+            src={avatar}
+            className="w-8 h-8 rounded-full"
+            alt="Admin"
+          />
         </div>
-        {avatar && (
-          <img src={avatar} className="aspect-[1] object-contain w-8 shrink-0" />
-        )}
+      )}
+      <div className="max-w-[75%]">
+        <div className={`${getBorderRadius()} shadow-sm ${getBgColor()} ${getTextColor()} p-3`}>
+          {content}
+        </div>
+        <div className="text-xs text-gray-500 mt-1">
+          {time}
+        </div>
       </div>
+      <div className="flex-1" /> {/* Spacer */}
     </div>
   );
 };

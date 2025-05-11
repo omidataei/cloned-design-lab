@@ -1,56 +1,46 @@
-import React from "react";
+
+import React, { useState } from "react";
+import { Search, MessageCircle, Phone, Video, Users, Settings } from "lucide-react";
 
 const UserList: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  
   return (
-    <div className="rounded-[6px_0px_0px_6px] min-w-[240px] min-h-[778px] w-[370px]">
-      <div className="items-center flex min-h-[76px] w-full gap-4 text-[15px] text-[#2f2b3d] font-normal whitespace-nowrap leading-[1.6] px-6 pt-0 pb-6 max-md:px-5">
-        <div className="justify-center items-stretch border-[input-border] self-stretch flex min-w-60 min-h-[38px] w-full flex-col flex-1 shrink basis-[0%] my-auto border-0 border-solid">
-          <div className="rounded-[border-round] w-full gap-1">
-            <div className="items-center border border-[input-border] flex w-full gap-2.5 px-3.5 py-[7px] rounded-md border-solid">
-              <div className="self-stretch flex min-w-60 w-[268px] flex-col justify-center flex-1 shrink basis-[0%] my-auto">
-                <div className="gap-2.5">Search...</div>
-              </div>
-            </div>
-          </div>
+    <div className="w-[320px] border-r border-gray-200 bg-white h-full flex flex-col">
+      <div className="p-4 border-b border-gray-200">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full py-2 pl-10 pr-4 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-200"
+          />
         </div>
       </div>
-      <div className="border min-h-px w-full border-[rgba(47,43,61,0.12)] border-solid" />
-      <div className="w-full px-3 py-2">
-        <div className="items-center flex w-full gap-[11px] text-[15px] text-[#675DD8] font-normal whitespace-nowrap leading-none px-4 py-2">
-          <div className="self-stretch flex gap-1 my-auto">
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/ea728f47bb89ddc09cc36a332aadc3d0342e4bfe?placeholderIfAbsent=true"
-              className="aspect-[1] object-contain w-6 shrink-0"
-            />
-            <div className="text-[#675DD8]">ALL</div>
-          </div>
-          <div className="border self-stretch w-0 shrink-0 h-6 my-auto border-[rgba(47,43,61,0.12)] border-solid" />
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/acb8175049e1e545cdc870e870c3e3c929e88f4a?placeholderIfAbsent=true"
-            className="aspect-[1.19] object-contain w-[25px] self-stretch shrink-0 my-auto"
-          />
-          <div className="border self-stretch w-0 shrink-0 h-6 my-auto border-[rgba(47,43,61,0.12)] border-solid" />
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/6847cef5ba57d30a6fa87be1aef52fb3ab5e319b?placeholderIfAbsent=true"
-            className="aspect-[1/1] object-contain w-[21px] fill-[#737682] self-stretch shrink-0 my-auto"
-          />
-          <div className="border self-stretch w-0 shrink-0 h-6 my-auto border-[rgba(47,43,61,0.12)] border-solid" />
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/4f7abdbf3c6554ec04c0b4ca0b04e653091749c2?placeholderIfAbsent=true"
-            className="aspect-[1/1] object-contain w-[21px] fill-[#E6E6E9] self-stretch shrink-0 my-auto"
-          />
-          <div className="border self-stretch w-0 shrink-0 h-6 my-auto border-[rgba(47,43,61,0.12)] border-solid" />
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/f0ffce9ef13c5e7cf95df194602e1f55fbcf7d7c?placeholderIfAbsent=true"
-            className="aspect-[8/7] object-contain w-6 fill-[#E6E6E9] self-stretch shrink-0 my-auto"
-          />
+      
+      <div className="flex items-center justify-between border-b border-gray-200 py-2 px-4">
+        <div className="flex items-center text-indigo-600 font-medium gap-1">
+          <MessageCircle size={18} />
+          <span>ALL</span>
         </div>
+        <div className="flex items-center gap-4">
+          <Phone className="text-gray-500" size={18} />
+          <Video className="text-gray-500" size={18} />
+          <Users className="text-gray-500" size={18} />
+          <Settings className="text-gray-500" size={18} />
+        </div>
+      </div>
+      
+      <div className="overflow-y-auto flex-1">
         <UserListItem
           avatar="https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/0afe33f522d1396c9a48c15ddb7348757fad033d?placeholderIfAbsent=true"
           name="Felecia Rower"
           message="I will purchase it for sure. 👍"
           date="Apr 10"
           active={true}
+          unread={true}
         />
         <UserListItem
           avatar="https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/fb100dc63704723dc3ef14ba3c43a7394e477426?placeholderIfAbsent=true"
@@ -87,6 +77,7 @@ interface UserListItemProps {
   message: string;
   date: string;
   active?: boolean;
+  unread?: boolean;
 }
 
 const UserListItem: React.FC<UserListItemProps> = ({
@@ -95,39 +86,33 @@ const UserListItem: React.FC<UserListItemProps> = ({
   message,
   date,
   active = false,
+  unread = false,
 }) => {
   return (
     <div
-      className={`items-center rounded-md flex w-full gap-4 mt-1 px-3 py-2 ${
-        active ? "shadow-[0px_2px_6px_0px_rgba(115,103,240,0.30)]" : ""
+      className={`flex items-center gap-3 p-3 hover:bg-gray-50 cursor-pointer ${
+        active ? "bg-indigo-50" : ""
       }`}
     >
-      <div className="self-stretch flex min-h-10 items-center gap-2.5 justify-center w-10 my-auto">
+      <div className="relative">
         <img
           src={avatar}
-          className="aspect-[1] object-contain w-10 self-stretch my-auto"
+          className="w-10 h-10 rounded-full object-cover"
+          alt={name}
         />
+        {unread && (
+          <span className="absolute -top-1 -right-1 bg-red-500 rounded-full w-4 h-4 flex items-center justify-center text-white text-xs">
+            2
+          </span>
+        )}
+        <span className={`absolute bottom-0 right-0 w-2.5 h-2.5 ${active ? "bg-green-500" : "bg-gray-300"} border-2 border-white rounded-full`}></span>
       </div>
-      <div
-        className={`self-stretch min-w-60 min-h-11 ${
-          active ? "text-white" : "text-[#2f2b3d]"
-        } font-normal flex-1 shrink basis-[0%] my-auto`}
-      >
-        <div className="flex w-full">
-          <div className="text-[15px] leading-none flex-1 shrink basis-[0%]">
-            {name}
-          </div>
-          <div className="flex items-center gap-[5px] text-[13px] text-right leading-loose">
-            <img
-              src={active ? "https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/b9411c128ac3202130bc97fcc2d7085d8939e890?placeholderIfAbsent=true" : "https://cdn.builder.io/api/v1/image/assets/0a7789a751af45d89d78b26880dd3f82/ca7914ced4c8230f08bf1c1ce200991017e52473?placeholderIfAbsent=true"}
-              className={`aspect-[1] object-contain w-4 ${
-                active ? "fill-[bg-white]" : "fill-[#737682]"
-              } self-stretch shrink-0 my-auto`}
-            />
-            <div className="self-stretch my-auto">{date}</div>
-          </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex justify-between">
+          <h4 className={`font-medium truncate ${active ? "text-indigo-700" : "text-gray-900"}`}>{name}</h4>
+          <span className="text-xs text-gray-500 whitespace-nowrap">{date}</span>
         </div>
-        <div className="text-[13px] leading-loose">{message}</div>
+        <p className="text-sm text-gray-500 truncate">{message}</p>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, MessageCircle, Instagram, Telegram, WhatsApp } from "lucide-react";
+import { Search, MessageCircle, Instagram, MessageSquare, Phone } from "lucide-react";
 
 const UserList: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,8 +26,8 @@ const UserList: React.FC = () => {
         </div>
         <div className="flex items-center gap-4">
           <Instagram className="text-[#9b87f5] hover:text-indigo-700 cursor-pointer" size={18} />
-          <Telegram className="text-[#9b87f5] hover:text-indigo-700 cursor-pointer" size={18} />
-          <WhatsApp className="text-[#9b87f5] hover:text-indigo-700 cursor-pointer" size={18} />
+          <MessageSquare className="text-[#9b87f5] hover:text-indigo-700 cursor-pointer" size={18} />
+          <Phone className="text-[#9b87f5] hover:text-indigo-700 cursor-pointer" size={18} />
         </div>
       </div>
       

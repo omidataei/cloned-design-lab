@@ -15,26 +15,19 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   avatar,
 }) => {
   const isUser = type === "user";
-  const isAdminPrimary = type === "admin-primary";
-  const isAdminSuccess = type === "admin-success";
 
   const getBgColor = () => {
-    if (isUser) return "bg-white";
-    if (isAdminPrimary) return "bg-indigo-100";
-    if (isAdminSuccess) return "bg-green-500";
-    return "bg-indigo-600";
+    if (isUser) return "bg-[#333333]";
+    return "bg-[#444444]";
   };
 
   const getTextColor = () => {
-    if (isUser) return "text-gray-800";
-    if (isAdminPrimary) return "text-indigo-700";
-    if (isAdminSuccess || type === "admin") return "text-white";
-    return "text-gray-800";
+    return "text-white";
   };
 
   const getBorderRadius = () => {
-    if (isUser) return "rounded-tl-lg rounded-tr-lg rounded-br-lg";
-    return "rounded-tl-lg rounded-tr-lg rounded-bl-lg";
+    if (isUser) return "rounded-t-lg rounded-bl-lg";
+    return "rounded-t-lg rounded-br-lg";
   };
 
   if (isUser) {
@@ -42,10 +35,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
       <div className="flex items-start gap-3 mb-4">
         <div className="flex-1" /> {/* Spacer */}
         <div className="max-w-[75%]">
-          <div className={`${getBorderRadius()} shadow-sm border border-gray-200 ${getBgColor()} ${getTextColor()} p-3`}>
+          <div className={`${getBorderRadius()} ${getBgColor()} ${getTextColor()} p-3`}>
             {content}
           </div>
-          <div className="text-xs text-gray-500 mt-1 text-right">
+          <div className="text-xs text-gray-400 mt-1 text-right">
             {time}
           </div>
         </div>
@@ -72,10 +65,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
         </div>
       )}
       <div className="max-w-[75%]">
-        <div className={`${getBorderRadius()} shadow-sm ${getBgColor()} ${getTextColor()} p-3`}>
+        <div className={`${getBorderRadius()} ${getBgColor()} ${getTextColor()} p-3`}>
           {content}
         </div>
-        <div className="text-xs text-gray-500 mt-1">
+        <div className="text-xs text-gray-400 mt-1">
           {time}
         </div>
       </div>
